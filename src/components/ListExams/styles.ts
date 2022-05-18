@@ -58,18 +58,21 @@ export const ContainerExam = styled.div`
         background: #007565;
         justify-content: space-between;
         align-items: center;
-        padding: 0 40px;
+        padding: 0 25px;
         height: 120px;
         border-radius: 10px;
         .welcome{
           h1{
             color: #009985;
             margin-bottom: 5px;
-            font-size: 2rem;
+            font-size: 150%;
+            margin-left: 2px;
           }
           h2{
             color: #fff;
-            font-size: 2.5rem;
+            font-size: 90%;
+            margin-left: 2px;
+            margin-top: 15px;
           }
         }
         button{
@@ -77,7 +80,7 @@ export const ContainerExam = styled.div`
           border: none;
           outline: none;
           img{
-            height: 70px;
+            height: 30px;
             
           }
         }
@@ -85,10 +88,10 @@ export const ContainerExam = styled.div`
       .search{
         display: flex;
         align-items: center;
-        margin-left: 30px;
+        margin-left: 20px;        
         margin-top: 20px;
         input{
-          width: 35vw;
+          width: 45vw;
           height: 40px;
           text-align: 50px;
           border: 2.5px solid var(--green);

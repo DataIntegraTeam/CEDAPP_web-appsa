@@ -110,7 +110,7 @@ export const ContainerExam = styled.div`
     background: var(--green);
     color: #009985;
     width: 99%;
-    font-size: 150%;
+    font-size: 50%;
     padding: 2vw;
     height: 90px;
     border-radius: 3px;
@@ -119,7 +119,9 @@ export const ContainerExam = styled.div`
     float: left;
     
     /* justify-items: flex-start; */
-    
+    h2 {
+      font-size: 12%;
+    }
   }
   #textAndButton {
     align-items: center;
