@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container } from "./styles";
 import axios from "axios";
-import { ListExams } from "../ListExams";
+import { ListExams } from "../../components/ListExams";
 import { Link } from "react-router-dom";
 // import { mask } from "../../util/format";
 // import { useForm } from "react-hook-form";
@@ -26,7 +26,8 @@ type Data={
 export function Login() {
 
   const [valuePlaceHolder, setValuePlaceHolder] = useState(false);
-  const [data, setData] = useState<Data >();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [data, setData] = useState<Data>();
 
   const [user, setUser] = useState<PropsUser>({
     cpf: "",
@@ -53,8 +54,21 @@ const handleSubmit = async () => {
     password: user.cpf,
     isMedico: user.isDoctor
   }).then(async (res)=>{
-    await setData(res.data);
-    console.log(data)
+    if(res.status === 200){
+      await setData(res.data);
+      setIsAuthenticated(true);
+      console.log(data)
+    }else{
+      axios.post("http://138.185.33.188:3333/session",{
+        login: user.crm,
+        password: user.cpf,
+        isMedico: user.isDoctor
+       }).then(async (res)=>{
+        await setData(res.data);
+        setIsAuthenticated(true);
+        console.log(data, "segunda api")
+      })
+    }
   })
 }
 return (
@@ -102,15 +116,13 @@ return (
           />{" "}
         </div>
             <button onClick={handleSubmit}>
-              <Link to={"/dashboard"}>
-                Entrar
-              </Link>
+              Entrar
             </button>
         <div className="line" ></div>
       </div>
       <footer>
-        <div style={{display: 'none'}}>
-            <ListExams data={data}/>
+        <div style={{display: isAuthenticated ? "flex" : "none"}}>
+            <ListExams close={()=>setIsAuthenticated(false)} data={data}/>
         </div>
       </footer>
     </Container>
