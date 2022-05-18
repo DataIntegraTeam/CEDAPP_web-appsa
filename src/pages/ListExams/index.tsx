@@ -4,11 +4,8 @@ import pesquisa from "../../icon/pesquisa.png";
 import power from "../../icon/power.png";
 import pdf from "../../icon/pdf_icon.png";
 
+export function ListExams() {
 
-
-export function ListExams(data: any) {
-  console.log(data);
- 
   return (
     <>
       <ContainerExam>
@@ -62,7 +59,7 @@ export function ListExams(data: any) {
                 
                 <div id="patientInformation">
                   <div>
-                    <h1>nome do paciente</h1>
+                    NOME DO PACIENTE
                   </div>
                   {/* <div>                    
                   </div> */}

@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 export const ContainerExam = styled.div`
-
   #container {
     background: #ffffff;
     max-width: 100%;
     margin-top: -10px;
     height: 100%;
-
   }
   
   .containerLint01 {
@@ -17,7 +15,6 @@ export const ContainerExam = styled.div`
     height: 100%;
     border-radius: 2px;
     padding: 10px;  
-
     #page_header {
       /* border: 1px solid #ff0000; */
       width: 50%;
@@ -34,12 +31,10 @@ export const ContainerExam = styled.div`
     }
   }
   
-
   #header_logo {
     /* border: 1px solid #ff0000; */
     width: 90%;
   }
-
   #logo02 {
     /* margin-bottom: 1px; */
     /* border: 1px solid #ff0000; */
@@ -49,7 +44,6 @@ export const ContainerExam = styled.div`
     margin-top: 1px;
     
   }
-
   #textHeader {
     /* border: 1px solid #ff0000; */
     max-width: 90%;
@@ -76,14 +70,11 @@ export const ContainerExam = styled.div`
       justify-content: center;
       /* font-size: clamp(1em, 1em + 1vw, 1.5em); */
     }
-
   } 
-
   .navigation_header {
     /* border: 1px solid #ff0000; */
     /* text-align: center; */
   }
-
   #line {    
     margin-top: 8px;
     width: 90%;
@@ -91,7 +82,6 @@ export const ContainerExam = styled.div`
     margin-left: 5%;
     background: #f1f1f1;
   }
-
   #containerLint02 {
     background: #f1f1f1;
     border: 1px solid #e6e6e6;
@@ -102,7 +92,6 @@ export const ContainerExam = styled.div`
     padding: 3.5px;
     display: flex;
   }
-
   #conteinerHist {
     background: #ffffff;
     border: 1px solid #e6e6e6;    
@@ -141,7 +130,6 @@ export const ContainerExam = styled.div`
     height: 35px;
     margin-top: 4px;
   }
-
   #patientInformation {
     /* border: 1px solid #FFFFFF; */
     color: #FFFFFF;
@@ -151,7 +139,6 @@ export const ContainerExam = styled.div`
     margin-top: 4px;
     
   }
-
   .buttonPower {
     /* border: 1px solid #ff0000; */
     background: var(--green);
@@ -171,7 +158,6 @@ export const ContainerExam = styled.div`
       background: var(--green);
     }
   }
-
   .inputFilter {
     width: 35vw;
     height: 40px;
@@ -183,7 +169,6 @@ export const ContainerExam = styled.div`
     display: flex;
     padding: 9px;
   }
-
   #divbuttonconsulta {    
     background: #ffffff;
     width: 96%;
@@ -194,11 +179,8 @@ export const ContainerExam = styled.div`
     margin-left: 2%;
     border-top: 3px solid #f1f1f1;
     border-bottom: 3px solid #f1f1f1;   
-
     height: 70px;
-
   }
-
   .buttonConsultar {
     background: var(--green);
     width: 40px;
@@ -215,11 +197,9 @@ export const ContainerExam = styled.div`
       height: 25px;
       margin-top: 3px;
       margin-left: -2px;
-
     }
     
   }
-
   #text_hist02 {
     background: #ffffff;
     width: 96%;
@@ -246,23 +226,19 @@ export const ContainerExam = styled.div`
     font-size: 15px;
     color: black;
     position: relative;
-
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
     font-weight: bold;
   }
-
   #text_hist03 {
     width: 96%;
     display: block;
     margin: 0 auto;
     margin-left: 2%;
     border-radius: 2px;
-
   }
-
   .examList {
     background: #f1f1f1;
     /* border: 1px solid #e6e6e6; */
@@ -291,7 +267,6 @@ export const ContainerExam = styled.div`
       color: gray;
       text-align: left;
       font-weight: bold;
-
       .patientName {
         font-size: 120%;
         color: var(--green);
@@ -322,7 +297,6 @@ export const ContainerExam = styled.div`
         display: flex;
         border-radius: 5px;
         /* flex-direction: row-reverse; */
-
         #pdf_icon {
           width: 99%;
           height: 99%;
@@ -341,11 +315,9 @@ export const ContainerExam = styled.div`
     width: 20px;
     height: 18px;
   }
-
   .caixaEx {
     float: left;
     font-size: 70%;
     font-weight: bold;
-
   } 
 `;
