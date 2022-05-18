@@ -13,7 +13,7 @@ export const ContainerExam = styled.div`
   header{
     display: flex;
     flex-direction: column;
-    background: #d9d9d9;
+    background: var(--caixaLogin);
     width: 90%;
     padding: 20px;
     border-radius: 5px;
@@ -30,11 +30,11 @@ export const ContainerExam = styled.div`
   }
   .separator{
     display: flex;
-    background: #f1f1f1;
+    background: var(--caixaLogin);
     height: 6px;
     width: 90%;
     border-radius: 5px;
-    margin: 20px auto;
+    margin: 10px auto;
   }
   .wrapper{
     display: flex;
@@ -44,15 +44,15 @@ export const ContainerExam = styled.div`
     border-radius: 5px;
     margin: 0 auto;
     margin-bottom: 20px;
-    background: #d9d9d9;
+    background: var(--caixaLogin);
     .dados{
       display: flex;
       flex-direction: column;
       width: 96%;
       margin: 15px auto;
       border-radius: 5px;
-      background: var(--background);
-      padding: 5px;
+      background: var(--width);
+      padding: 2px;
       .cabecalho{
         display: flex;
         background: #007565;
@@ -103,24 +103,26 @@ export const ContainerExam = styled.div`
         }
         button{
           height: 40px;
-          width: 50px;
-          padding: 4px 10px 4px 10px; 
+          width: 40px;
+          padding: 4px 5px 2px 5px; 
           background-color: var(--green);
           border-radius: 5px;
           border: 1px solid #e6e6e6;
           img{
-            height: 100%;
-            width: 100%;
+            height: 80%;
+            width: 80%;
           }
         }
       }
       .separator{
         width: 100%;
+        background: var(--caixaLogin);
       }
       .body{
         display: flex;
         flex-direction: column;
         width: 100%;
+        background: var(--white);
         .data{
           display: flex;
           flex-direction: column;
