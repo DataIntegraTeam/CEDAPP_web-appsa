@@ -242,6 +242,7 @@ export const ContainerExam = styled.div`
     border-radius: 2px;
   }
   .examList {
+    flex-direction: column;
     background: #f1f1f1;
     /* border: 1px solid #e6e6e6; */
     /* border: 1px solid #ff0000; */
