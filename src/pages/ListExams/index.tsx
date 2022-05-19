@@ -1,10 +1,35 @@
+import { useContext, useEffect, useState } from "react";
 import { ContainerExam } from "./styles";
 import logo03 from "../../assets/logo03.png";
 import pesquisa from "../../icon/pesquisa.png";
 import power from "../../icon/power.png";
 import pdf from "../../icon/pdf_icon.png";
+import { AuthContext } from "../../hooks/auth";
+import { apiHnsn, apiLaureano } from "../../service";
+
+interface listFinalLaudos {
+  nmPaciente: string;
+  nrControle: string;
+  dtLaudo: string;
+  dsExame: string;
+}
 
 export function ListExams() {
+  const { usuarioHnsn, usuarioLaureano } = useContext(AuthContext);
+  const [data, setData] = useState<listFinalLaudos[]>([])
+  let LaudoExames: listFinalLaudos[] = [];
+  console.log(LaudoExames, "Test")
+  useEffect(() => {
+    apiHnsn.get(`/medico/${usuarioHnsn?.cdPrestadorArray}`).then((resp) => {
+      setData(resp.data)
+      console.log(resp.data[0])
+    })
+    LaudoExames.push(...data.slice(0, 200));
+  }, [])
+  if(!usuarioHnsn && usuarioLaureano) {
+    return (<h1>Hello Word</h1>)    
+  };
+  // console.log(usuarioHnsn, usuarioLaureano)
 
   return (
     <>
@@ -59,7 +84,7 @@ export function ListExams() {
                 
                 <div id="patientInformation">
                   <div>
-                    NOME DO PACIENTE
+                    {usuarioHnsn?.nome || usuarioLaureano?.nome}
                   </div>
                   {/* <div>                    
                   </div> */}
@@ -85,12 +110,14 @@ export function ListExams() {
                 </div>
 
                 <div className="examList">
-                  <div id="examData">
-                    <p className="patientName">Nome:</p><br />
-                    <p>N°</p>
-                    <p>00/00/0000</p>
-                    <p>TIPO DE EXAME</p>
-                  </div>
+                  {data.map(item => (
+                    <div id="examData">
+                      <p className="patientName">{item.nmPaciente}</p><br />
+                      <p>{item.nrControle}</p>
+                      <p>{item.dtLaudo}</p>
+                      <p>{item.dsExame}</p>
+                    </div>
+                  ))}
                   <div id="PDF">
                     <button className="buttonPDF">
                       <img

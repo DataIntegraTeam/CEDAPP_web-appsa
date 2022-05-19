@@ -1,79 +1,85 @@
 import { useState } from "react";
-import { Container } from "./styles";
-import axios from "axios";
-import { ListExams } from "../../components/ListExams";
-import { Link } from "react-router-dom";
-// import { mask } from "../../util/format";
-// import { useForm } from "react-hook-form";
-// import { api } from "../../serveles";
+import { Container } from "./styles";  
+import { apiHnsn, apiLaureano } from "../../service";
+import { useAuth } from "../../hooks/auth"; 
+import Link from "next/link";
 
-type PropsUser ={
+type PropsUser = {
   cpf: string,
   crm: string,
   isDoctor: boolean
 }
-
-type Data={
-  token: string,
-  user:{
-    crm: string,
-    cpf: string,
-    nome: string,
-    dtNascimento: string,
-  }
-}
-
+ 
 export function Login() {
 
   const [valuePlaceHolder, setValuePlaceHolder] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [data, setData] = useState<Data>();
-
+  const { loadStorageData } = useAuth();
   const [user, setUser] = useState<PropsUser>({
     cpf: "",
     crm: "",
     isDoctor: true
   });
-const handleInputCrm = (e: any) => {
+  const handleInputCrm = (e: any) => {
     setUser({
       ...user,
       crm: e.currentTarget.value,
     });
-}
-const handleInputCpf = (e: any) => {
-  setUser({
-    ...user,
-    cpf: e.currentTarget.value,
-  });
-}
+  }
+  const handleInputCpf = (e: any) => {
+    setUser({
+      ...user,
+      cpf: e.currentTarget.value,
+    });
+  }
 
-
-const handleSubmit = async () => {
-  axios.post("http://vpn.hnsn.com.br:8283/session",{
-    login: user.crm,
-    password: user.cpf,
-    isMedico: user.isDoctor
-  }).then(async (res)=>{
-    if(res.status === 200){
-      await setData(res.data);
-      setIsAuthenticated(true);
-      console.log(data)
-    }else{
-      axios.post("http://138.185.33.188:3333/session",{
+  const handleSubmit = async () => {
+    await apiLaureano
+      .post("/session", {
         login: user.crm,
         password: user.cpf,
         isMedico: user.isDoctor
-       }).then(async (res)=>{
-        await setData(res.data);
-        setIsAuthenticated(true);
-        console.log(data, "segunda api")
       })
-    }
-  })
-}
-return (
+      .then(async (response) => {
+        var { token, user } = response.data;
+
+        localStorage.setItem("@cedapp:tokenLaureano", token);
+        localStorage.setItem(
+          "@cedapp:userLaureano",
+          JSON.stringify(user)
+        );
+
+        apiLaureano.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${token}`;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await apiHnsn
+      .post("/session", {
+        login: user.crm,
+        password: user.cpf,
+        isMedico: user.isDoctor
+      })
+      .then(async (response) => {
+        var { token, user } = response.data;
+
+        localStorage.setItem("@cedapp:tokenHnsn", token);
+        localStorage.setItem("@cedapp:userHnsn", JSON.stringify(user));
+
+        apiHnsn.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    await loadStorageData();
+  }
+
+  return (
     <Container>
-     <div className="form">
+      <div className="form">
         <p>Faça seu login</p>
         <div className="medical_access">
           <input className="radio1" type="radio" id="access1" name="radio" value="CRM" v-model="checked"
@@ -98,10 +104,10 @@ return (
           <input
             type="number"
             name="crm"
-            placeholder={valuePlaceHolder? "CRM": "CPF"}
+            placeholder={valuePlaceHolder ? "CRM" : "CPF"}
             onChange={handleInputCrm}
             value={user.crm}
-            // ref={register()}
+          // ref={register()}
           />
         </div>
         <div className="pw">
@@ -109,22 +115,24 @@ return (
           <input
             type="text"
             name="cpf"
-            placeholder={valuePlaceHolder? "CPF": "Data de nascimento"}
+            placeholder={valuePlaceHolder ? "CPF" : "Data de nascimento"}
             onChange={handleInputCpf}
             value={user.cpf}
-            // ref={register()}
+          // ref={register()}
           />{" "}
         </div>
+          <a href="/ListExams">
             <button onClick={handleSubmit}>
               Entrar
             </button>
+          </a>
         <div className="line" ></div>
       </div>
-      <footer>
-        <div style={{display: isAuthenticated ? "flex" : "none"}}>
-            <ListExams close={()=>setIsAuthenticated(false)} data={data}/>
+      {/* <footer>
+        <div style={{ display: isAuthenticated ? "flex" : "none" }}>
+          <ListExams close={() => setIsAuthenticated(false)} data={data} isAthenticated={isAuthenticated} />
         </div>
-      </footer>
+      </footer> */}
     </Container>
   );
 }

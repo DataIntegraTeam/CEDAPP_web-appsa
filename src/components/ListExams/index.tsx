@@ -2,41 +2,30 @@ import { ContainerExam } from "./styles";
 import logo03 from "../../assets/logo03.png";
 import pesquisa from "../../icon/pesquisa.png";
 import power from "../../icon/power.png";
-import pdf from "../../icon/pdf_icon.png";
-import { useEffect } from "react";
-import axios from "axios";
+import pdf from "../../icon/pdf_icon.png"; 
+import { apiHnsn, apiLaureano } from "../../service";
 
 type PropsList={
   data?:{
-    token: string,
     user:{
       crm: string,
       cpf: string,
       nome: string,
       dtNascimento: string,
+      cdPrestador: number,
+      token: string,
     }
   },
+  isAthenticated?: boolean,
   close: ()=>void;
 }
 
-export function ListExams({data, close}: PropsList) {
-  console.log(data);
+export function ListExams({data, close, isAthenticated}: PropsList) {
+  // console.log(data);
   
-  // useEffect(()=>{
-  //   const handleSubmit = async () => {
-  //     axios.post("http://vpn.hnsn.com.br:8283/session",{
-  //     }).then(async (res)=>{
-  //       if(res.status === 200){
-         
-  //       }else{
-  //         axios.post("http://138.185.33.188:3333/session",{
-  //          }).then(async (res)=>{
-  //           console.log(data, "segunda api")
-  //         })
-  //       }
-  //     })
-  //   }
-  // },[]);
+  if(isAthenticated) {
+        
+  }
 
   return (
     <ContainerExam>
